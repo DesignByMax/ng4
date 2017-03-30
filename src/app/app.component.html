@@ -1,3 +1,20 @@
 <h1>
-  {{title}}
+    {{title}}
 </h1>
+
+<div *ngIf="title; then login else logout"></div>
+<ng-template #login>
+    <h3>Booly is logged-in</h3>
+</ng-template>
+<ng-template #logout>
+    <h3>Loggedout</h3>
+</ng-template>
+<button (click)="logOut()">Logging out</button>
+
+<hr>
+
+<form #f="ngForm">
+    <input ngModel type="email" name="email" placeholder="youremail@yahoo.com" email required>
+    <button [disabled]="!f.valid">{{ f.valid ? 'Valid:Press Me' : 'Do not Press' }}</button>
+    <h5>This form is {{f.valid ? 'VALID' : 'NOT-VALID'}}</h5>
+</form>
