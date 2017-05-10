@@ -18,3 +18,13 @@
     <button [disabled]="!f.valid">{{ f.valid ? 'Valid:Press Me' : 'Do not Press' }}</button>
     <h5>This form is {{f.valid ? 'VALID' : 'NOT-VALID'}}</h5>
 </form>
+
+<hr>
+
+<input type="text" required [(ngModel)]="name" />
+<button (click)="add(name)">ADD</button>
+
+<ul *ngFor="let item of maxData; let i">
+    <li>{{item}}</li>
+    <button (click)="delete(i)" id="delete">delete</button>
+</ul>
