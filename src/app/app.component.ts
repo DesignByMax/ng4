@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
+import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {MdButton, MdDialog, MdDialogRef, MdSnackBar, MdInputContainer, MdCard, MdInputModule, MdInputDirective} from '@angular/material';
+
+import 'hammerjs';
 
 @Component({
   selector: 'app-root',

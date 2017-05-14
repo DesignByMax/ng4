@@ -1,6 +1,37 @@
 <h1>
     {{title}}
 </h1>
+<!--<md-sidenav-layout [class.m2app-dark]="isDarkTheme">
+</md-sidenav-layout>-->
+
+<md-card>
+    <button md-button>FLAT</button>
+    <button md-raised-button md-tooltip="This is a tooltip!">RAISED</button>
+    <button md-raised-button color="primary">PRIMARY RAISED</button>
+    <button md-raised-button color="accent">ACCENT RAISED</button>
+</md-card>
+<md-card>
+    <md-checkbox>Unchecked</md-checkbox>
+    <md-checkbox [checked]="true">Checked</md-checkbox>
+    <md-checkbox [indeterminate]="true">Indeterminate</md-checkbox>
+    <md-checkbox [disabled]="true">Disabled</md-checkbox>
+</md-card>
+
+<md-card>
+    <md-radio-button name="symbol">Alpha</md-radio-button>
+    <md-radio-button name="symbol">Beta</md-radio-button>
+    <md-radio-button name="symbol" disabled>Gamma</md-radio-button>
+</md-card>
+
+
+<!--<md-input #nickname placeholder="Nickname" maxlength="50">-->
+<!--<md-hint align="end">
+        {{nickname.characterCount}} / 50
+    </md-hint>-->
+<!--</md-input>-->
+
+
+
 
 <div *ngIf="title; then login else logout"></div>
 <ng-template #login>
@@ -9,7 +40,7 @@
 <ng-template #logout>
     <h3>Loggedout</h3>
 </ng-template>
-<button (click)="logOut()">Logging out</button>
+<button md-button-primary>TOGGLE DARK THEME</button>
 
 <hr>
 
@@ -22,9 +53,9 @@
 <hr>
 
 <input type="text" required [(ngModel)]="name" />
-<button (click)="add(name)">ADD</button>
+<button md-raised-button color="accent" (click)="add(name)">ADD</button>
 
 <ul *ngFor="let item of maxData; let i">
     <li>{{item}}</li>
-    <button (click)="delete(i)" id="delete">delete</button>
+    <button md-raised-button color="accent" (click)="delete(i)" id="delete">delete</button>
 </ul>

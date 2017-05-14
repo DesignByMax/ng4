@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import {MdButtonModule, MdCheckboxModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,8 @@ import { LocalStorageModule } from 'angular-2-local-storage';
   imports: [
     BrowserModule,
     FormsModule,
+    MdButtonModule,
+    MdCheckboxModule,
     HttpModule,
     LocalStorageModule.withConfig({
       prefix: 'my-app',
