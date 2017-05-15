@@ -1,42 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 import {MdButtonModule, MdCheckboxModule} from '@angular/material';
-import {MdButton, MdDialog, MdDialogRef, MdSnackBar, MdInputContainer, MdCard, MdInputModule, MdInputDirective} from '@angular/material';
-
-import 'hammerjs';
+import {MdProgressBar, MdButton, MdDialog, MdDialogRef, MdSnackBar, MdInputContainer, MdCard, MdInputModule} from '@angular/material';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {MaterialModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import '../../node_modules/hammerjs';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
 })
-
 export class AppComponent {
-  maxData: string[] = ['Max', 'Ali', 'Reza', 'Tala', 'Ala', 'Hello World'];
-  title: any = true;
+  isDarkTheme: boolean = false;
+  lastDialogResult: string;
 
-  constructor(private localStorageService: LocalStorageService ) { }
+  foods: any[] = [
+    {name: 'Pizza', rating: 'Excellent'},
+    {name: 'Burritos', rating: 'Great'},
+    {name: 'French fries', rating: 'Pretty good'},
+  ];
 
+  public progress = 0;
 
-  logOut() {
-    console.log('Hello world from logOut fn!');
-    this.title = !this.title;
+  constructor(private _dialog: MdDialog, private _snackbar: MdSnackBar) {
+    // Update the value for the progress-bar on an interval.
+    setInterval(() => {
+      this.progress = (this.progress + Math.floor(Math.random() * 4) + 1) % 100;
+    }, 200);
   }
 
-  add(name) {
-    this.maxData.push(name);
-    this.localStorageService.set('name', name);
+  openDialog() {
+    const dialogRef = this._dialog.open(DialogContent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.lastDialogResult = result;
+    })
   }
 
-  delete(n) {
-    console.log('the index is: ', n);
-    const index  = this.maxData.indexOf(n);
-    this.maxData.splice(index, 1);
+  showSnackbar() {
+    this._snackbar.open('YUM SNACKS', 'CHEW');
   }
-
-  greeter(person: string) {
-    return 'Hello, ' + person;
-  }
+}
 
 
+@Component({
+  template: `
+    <p>This is a dialog</p>
+    <p>
+      <label>
+        This is a text box inside of a dialog.
+        <input mdInput #dialogInput>
+      </label>
+    </p>
+    <p> <button md-button (click)="dialogRef.close(dialogInput.value)">CLOSE</button> </p>
+  `,
+})
+export class DialogContent {
+  constructor(@Optional() public dialogRef: MdDialogRef<DialogContent>) { }
 }

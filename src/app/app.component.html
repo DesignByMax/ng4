@@ -1,61 +1,140 @@
-<h1>
-    {{title}}
-</h1>
-<!--<md-sidenav-layout [class.m2app-dark]="isDarkTheme">
-</md-sidenav-layout>-->
+<md-sidenav-container [class.m2app-dark]="isDarkTheme">
 
-<md-card>
-    <button md-button>FLAT</button>
-    <button md-raised-button md-tooltip="This is a tooltip!">RAISED</button>
-    <button md-raised-button color="primary">PRIMARY RAISED</button>
-    <button md-raised-button color="accent">ACCENT RAISED</button>
-</md-card>
-<md-card>
-    <md-checkbox>Unchecked</md-checkbox>
-    <md-checkbox [checked]="true">Checked</md-checkbox>
-    <md-checkbox [indeterminate]="true">Indeterminate</md-checkbox>
-    <md-checkbox [disabled]="true">Disabled</md-checkbox>
-</md-card>
+    <md-sidenav #sidenav mode="side" class="app-sidenav">
+        Sidenav
+    </md-sidenav>
 
-<md-card>
-    <md-radio-button name="symbol">Alpha</md-radio-button>
-    <md-radio-button name="symbol">Beta</md-radio-button>
-    <md-radio-button name="symbol" disabled>Gamma</md-radio-button>
-</md-card>
+    <md-toolbar color="primary">
+        <button class="app-icon-button" (click)="sidenav.toggle()">
+            <i class="material-icons app-toolbar-menu">menu</i>
+        </button>
 
+        <span class="app-toolbar-filler"></span>
+        <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button>
+    </md-toolbar>
 
-<!--<md-input #nickname placeholder="Nickname" maxlength="50">-->
-<!--<md-hint align="end">
-        {{nickname.characterCount}} / 50
-    </md-hint>-->
-<!--</md-input>-->
+    <div class="app-content">
 
+        <md-card>
+            <button md-button>FLAT</button>
+            <button md-raised-button md-tooltip="This is a tooltip!">RAISED</button>
+            <button md-raised-button color="primary">PRIMARY RAISED</button>
+            <button md-raised-button color="accent">ACCENT RAISED</button>
+        </md-card>
 
+        <md-card>
+            <md-checkbox>Unchecked</md-checkbox>
+            <md-checkbox [checked]="true">Checked</md-checkbox>
+            <md-checkbox [indeterminate]="true">Indeterminate</md-checkbox>
+            <md-checkbox [disabled]="true">Disabled</md-checkbox>
+        </md-card>
 
+        <md-card>
+            <md-radio-button name="symbol">Alpha</md-radio-button>
+            <md-radio-button name="symbol">Beta</md-radio-button>
+            <md-radio-button name="symbol" disabled>Gamma</md-radio-button>
+        </md-card>
 
-<div *ngIf="title; then login else logout"></div>
-<ng-template #login>
-    <h3>Booly is logged-in</h3>
-</ng-template>
-<ng-template #logout>
-    <h3>Loggedout</h3>
-</ng-template>
-<button md-button-primary>TOGGLE DARK THEME</button>
+        <md-card class="app-input-section">
 
-<hr>
+            <md-input-container>
+                <input mdInput type="text" name="Max">
+            </md-input-container>
 
-<form #f="ngForm">
-    <input ngModel type="email" name="email" placeholder="youremail@yahoo.com" email required>
-    <button [disabled]="!f.valid">{{ f.valid ? 'Valid:Press Me' : 'Do not Press' }}</button>
-    <h5>This form is {{f.valid ? 'VALID' : 'NOT-VALID'}}</h5>
-</form>
+            <md-input-container>
+                <input mdInput #nickname placeholder="Nickname" maxlength="50">
+                <md-hint align="end">
+                    {{nickname.characterCount}} / 50
+                </md-hint>
+            </md-input-container>
 
-<hr>
+            <md-input-container>
+                <md-placeholder>
+                    <i class="material-icons app-input-icon">android</i>
+                </md-placeholder>
+                <input mdInput type="text" name="description">
+            </md-input-container>
 
-<input type="text" required [(ngModel)]="name" />
-<button md-raised-button color="accent" (click)="add(name)">ADD</button>
+            <md-input-container>
+                <span md-prefix>
+                  <i class="material-icons app-input-icon">motorcycle</i>
+                  &nbsp;
+                </span>
+                <input mdInput type="text" name="motorcycle" placeholder="Motorcycle model">
+            </md-input-container>
+        </md-card>
 
-<ul *ngFor="let item of maxData; let i">
-    <li>{{item}}</li>
-    <button md-raised-button color="accent" (click)="delete(i)" id="delete">delete</button>
-</ul>
+        <md-card>
+            <md-list class="app-list">
+                <md-list-item *ngFor="let food of foods">
+                    <h3 md-line>{{food.name}}</h3>
+                    <p md-line class="demo-secondary-text">{{food.rating}}</p>
+                </md-list-item>
+            </md-list>
+        </md-card>
+
+        <md-card>
+            <md-spinner class="app-spinner"></md-spinner>
+            <md-spinner color="accent" class="app-spinner"></md-spinner>
+        </md-card>
+
+        <md-card>
+            <label>
+        Indeterminate progress-bar
+        <md-progress-bar
+            class="app-progress"
+            mode="indeterminate"
+            aria-label="Indeterminate progress-bar example"></md-progress-bar>
+      </label>
+
+            <label>
+        Determinate progress bar - {{progress}}%
+        <md-progress-bar
+            class="app-progress"
+            color="accent"
+            mode="determinate"
+            [value]="progress"
+            aria-label="Determinate progress-bar example"></md-progress-bar>
+      </label>
+        </md-card>
+
+        <md-card>
+            <md-tab-group>
+                <md-tab label="Earth">
+                    <p>EARTH</p>
+                </md-tab>
+                <md-tab label="Fire">
+                    <p>FIRE</p>
+                </md-tab>
+            </md-tab-group>
+        </md-card>
+
+        <md-card>
+            <md-icon>build</md-icon>
+        </md-card>
+
+        <md-card>
+            <button md-button [md-menu-trigger-for]="menu">
+        MENU
+      </button>
+        </md-card>
+
+        <md-menu #menu="mdMenu">
+            <button md-menu-item>Lemon</button>
+            <button md-menu-item>Lime</button>
+            <button md-menu-item>Banana</button>
+        </md-menu>
+
+        <md-card>
+            <p>Last dialog result: {{lastDialogResult}}</p>
+            <button md-raised-button (click)="openDialog()">DIALOG</button>
+            <button md-raised-button (click)="showSnackbar()">SNACKBAR</button>
+        </md-card>
+
+    </div>
+
+</md-sidenav-container>
+
+<span class="app-action" [class.m2app-dark]="isDarkTheme">
+  <button md-fab><md-icon>check circle</md-icon></button>
+</span>
